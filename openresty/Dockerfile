@@ -12,7 +12,7 @@ RUN apt-get -y install libreadline-dev libncurses5-dev libpcre3-dev libssl-dev p
 RUN curl http://openresty.org/download/ngx_openresty-$OPENRESTY_VERSION.tar.gz > /usr/src/ngx_openresty-$OPENRESTY_VERSION.tar.gz
 RUN cd /usr/src && tar xzf ngx_openresty-$OPENRESTY_VERSION.tar.gz
 RUN cd /usr/src/ngx_openresty-$OPENRESTY_VERSION;\
-    ./configure --with-gzip;\
+    ./configure --with-http_gunzip_module;\
     make;\
     make install
 
