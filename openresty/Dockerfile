@@ -1,3 +1,9 @@
+# Usage:
+#   build:
+#     docker build -t="kikito/openresty" github.com/kikito/dockerfiles/openresty
+#   run:
+#     docker run -d -p 80:80 -v <sites-enabled-dir>:/etc/nginx/sites-enabled -v <log-dir>:/var/log/nginx kikito/openresty
+
 FROM        ubuntu:12.10
 MAINTAINER  kikito@gmail.com
 
@@ -17,10 +23,10 @@ RUN cd /usr/src/ngx_openresty-$OPENRESTY_VERSION;\
     make install
 
 # Run Nginx in the foreground
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+RUN echo "daemon off;" >> /usr/local/openresty/nginx/nginx.conf
 
 # nginx site conf
-ADD ./nginx-site.conf /etc/nginx/sites-available/default
+ADD ./nginx.conf /etc/nginx/sites-available/default
 
 # Install Luarocks
 ENV LUAROCKS_VERSION 2.0.13
@@ -38,7 +44,14 @@ RUN cd /usr/src/luarocks-$LUAROCKS_VERSION ;\
 RUN apt-get -y install supervisor
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Open HTTP and SSL ports
+# Attach volumes
+VOLUME /etc/nginx/sites-enabled
+VOLUME /var/log/nginx
+
+# Set working directory.
+WORKDIR /etc/nginx
+
+# Open HTTP and SSL portsttach volumes.
 EXPOSE 80 443
 
 CMD ["/usr/bin/supervisord"]
