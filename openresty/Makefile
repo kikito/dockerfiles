@@ -11,5 +11,3 @@ bash:
 	docker run -i -p 80:80 -v ~/nginx/www:/usr/share/nginx/www -v ~/nginx/log:/var/log/nginx -v ~/nginx/conf:/etc/nginx/conf.d -t $(TEMPLATE):$(TAG) /bin/bash
 push:
 	docker push $(TEMPLATE)
-killall:
-	docker ps -a -q | xargs docker stop | xargs docker rm
