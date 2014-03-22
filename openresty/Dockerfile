@@ -1,4 +1,4 @@
-FROM        kikito/base:0.5
+FROM        kikito/base:0.5.1
 MAINTAINER  kikito@gmail.com
 
 # Install Openresty
@@ -45,6 +45,7 @@ VOLUME /var/log/nginx
 VOLUME /etc/nginx/conf.d
 
 ADD nginx.conf /etc/nginx/nginx.conf
+ADD openresty.logrotate /etc/logrotate.d/openresty
 
 # Allow HTTP traffic
 EXPOSE 80

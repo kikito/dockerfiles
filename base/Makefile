@@ -1,5 +1,5 @@
 TEMPLATE=kikito/base
-TAG=0.5
+TAG=0.5.1
 
 all: build
 
