@@ -11,4 +11,4 @@ RUN apt-get -y install supervisor cron logrotate
 ADD supervisor /etc/supervisor
 
 # Execute supervisor on build
-ONBUILD CMD ["supervisord", "-n"]
+ONBUILD CMD supervisord -n

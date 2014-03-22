@@ -46,9 +46,7 @@ VOLUME /etc/nginx/conf.d
 
 ADD nginx.conf /etc/nginx/nginx.conf
 ADD openresty.logrotate /etc/logrotate.d/openresty
+ADD openresty.conf /etc/supervisor/conf.d/
 
 # Allow HTTP traffic
 EXPOSE 80
-
-# Include openresty in the supervisor
-ADD openresty.conf /etc/supervisor/conf.d/
